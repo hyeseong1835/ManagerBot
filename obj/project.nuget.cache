@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "8rWSs79/YIU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net\\3.17.4\\discord.net.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.commands\\3.17.4\\discord.net.commands.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.core\\3.17.4\\discord.net.core.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.interactions\\3.17.4\\discord.net.interactions.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.rest\\3.17.4\\discord.net.rest.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.webhook\\3.17.4\\discord.net.webhook.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\discord.net.websocket\\3.17.4\\discord.net.websocket.3.17.4.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\system.interactive.async\\6.0.1\\system.interactive.async.6.0.1.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\system.linq.async\\6.0.1\\system.linq.async.6.0.1.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\utf8jsonstreamreader\\3.1.0\\utf8jsonstreamreader.3.1.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\hs.common.system\\1.0.0\\hs.common.system.1.0.0.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.16\\microsoft.aspnetcore.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.16\\microsoft.netcore.app.ref.8.0.16.nupkg.sha512",
+    "C:\\Users\\comet\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.16\\microsoft.windowsdesktop.app.ref.8.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
