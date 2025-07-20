@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -20,10 +20,10 @@
 
     <PackageReference Include="Discord.Net" Version="3.17.4" />
 
-    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\NuGet\Discord\Core\Core.csproj" />
-    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\NuGet\Common\System\System.csproj" />
-    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\NuGet\Common\Collection\Collection.csproj" />
-    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\NuGet\Common\Text\Text.csproj" />
+    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\Libraries\Discord\Core\Discord.Core.csproj" />
+    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\Libraries\Common\System\Common.System.csproj" />
+    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\Libraries\Common\Collection\Common.Collection.csproj" />
+    <ProjectReference Include="C:\Users\comet\Documents\Dev\HS\Libraries\Common\Text\Common.Text.csproj" />
 
   </ItemGroup>
 

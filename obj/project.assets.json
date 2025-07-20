@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net9.0": {
       "Discord.Net/3.17.4": {
         "type": "package",
         "dependencies": {
@@ -20,12 +20,12 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.Commands.dll": {
+          "lib/net9.0/Discord.Net.Commands.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.Commands.dll": {
+          "lib/net9.0/Discord.Net.Commands.dll": {
             "related": ".xml"
           }
         }
@@ -39,12 +39,12 @@
           "System.ValueTuple": "4.5.0"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.Core.dll": {
+          "lib/net9.0/Discord.Net.Core.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.Core.dll": {
+          "lib/net9.0/Discord.Net.Core.dll": {
             "related": ".xml"
           }
         }
@@ -59,12 +59,12 @@
           "System.Reactive": "6.0.1"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.Interactions.dll": {
+          "lib/net9.0/Discord.Net.Interactions.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.Interactions.dll": {
+          "lib/net9.0/Discord.Net.Interactions.dll": {
             "related": ".xml"
           }
         }
@@ -75,12 +75,12 @@
           "Discord.Net.Core": "3.17.4"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.Rest.dll": {
+          "lib/net9.0/Discord.Net.Rest.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.Rest.dll": {
+          "lib/net9.0/Discord.Net.Rest.dll": {
             "related": ".xml"
           }
         }
@@ -92,12 +92,12 @@
           "Discord.Net.Rest": "3.17.4"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.Webhook.dll": {
+          "lib/net9.0/Discord.Net.Webhook.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.Webhook.dll": {
+          "lib/net9.0/Discord.Net.Webhook.dll": {
             "related": ".xml"
           }
         }
@@ -109,12 +109,12 @@
           "Discord.Net.Rest": "3.17.4"
         },
         "compile": {
-          "lib/net8.0/Discord.Net.WebSocket.dll": {
+          "lib/net9.0/Discord.Net.WebSocket.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Discord.Net.WebSocket.dll": {
+          "lib/net9.0/Discord.Net.WebSocket.dll": {
             "related": ".xml"
           }
         }
@@ -268,7 +268,7 @@
       },
       "HS.Common.Text/1.0.2": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "HS.Common.Collection": "1.0.0",
           "HS.Common.System": "1.0.0"
@@ -282,7 +282,7 @@
       },
       "HS.Discord.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "HS.Common.Collection": "1.0.0",
           "HS.Common.System": "1.0.0",
@@ -720,27 +720,27 @@
     },
     "HS.Common.Collection/1.0.0": {
       "type": "project",
-      "path": "../../HS/NuGet/Common/Collection/Collection.csproj",
-      "msbuildProject": "../../HS/NuGet/Common/Collection/Collection.csproj"
+      "path": "../../HS/Libraries/Common/Collection/Common.Collection.csproj",
+      "msbuildProject": "../../HS/Libraries/Common/Collection/Common.Collection.csproj"
     },
     "HS.Common.System/1.0.0": {
       "type": "project",
-      "path": "../../HS/NuGet/Common/System/System.csproj",
-      "msbuildProject": "../../HS/NuGet/Common/System/System.csproj"
+      "path": "../../HS/Libraries/Common/System/Common.System.csproj",
+      "msbuildProject": "../../HS/Libraries/Common/System/Common.System.csproj"
     },
     "HS.Common.Text/1.0.2": {
       "type": "project",
-      "path": "../../HS/NuGet/Common/Text/Text.csproj",
-      "msbuildProject": "../../HS/NuGet/Common/Text/Text.csproj"
+      "path": "../../HS/Libraries/Common/Text/Common.Text.csproj",
+      "msbuildProject": "../../HS/Libraries/Common/Text/Common.Text.csproj"
     },
     "HS.Discord.Core/1.0.0": {
       "type": "project",
-      "path": "../../HS/NuGet/Discord/Core/Core.csproj",
-      "msbuildProject": "../../HS/NuGet/Discord/Core/Core.csproj"
+      "path": "../../HS/Libraries/Discord/Core/Discord.Core.csproj",
+      "msbuildProject": "../../HS/Libraries/Discord/Core/Discord.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
+    "net9.0": [
       "Discord.Net >= 3.17.4",
       "HS.Common.Collection >= 1.0.0",
       "HS.Common.System >= 1.0.0",
@@ -770,7 +770,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -778,20 +778,20 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj"
+            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
             },
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj"
+            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
             },
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj"
+            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj"
             },
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj"
+            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj"
             }
           }
         }
@@ -809,8 +809,8 @@
       "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
           "Discord.Net": {
             "target": "Package",
@@ -828,20 +828,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.16, 8.0.16]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.16, 8.0.16]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.16, 8.0.16]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"

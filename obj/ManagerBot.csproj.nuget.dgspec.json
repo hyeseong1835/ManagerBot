@@ -22,7 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,20 +30,20 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj"
               }
             }
           }
@@ -61,8 +61,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Discord.Net": {
               "target": "Package",
@@ -80,20 +80,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -103,14 +89,14 @@
         }
       }
     },
-    "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
+    "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj",
+        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj",
         "projectName": "HS.Common.Collection",
-        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj",
+        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj",
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\obj\\",
+        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -183,14 +169,14 @@
         }
       }
     },
-    "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj": {
+    "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj",
+        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj",
         "projectName": "HS.Common.System",
-        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj",
+        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj",
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\obj\\",
+        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -212,8 +198,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
               }
             }
           }
@@ -267,14 +253,14 @@
         }
       }
     },
-    "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj": {
+    "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
       "version": "1.0.2",
       "restore": {
-        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj",
+        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj",
         "projectName": "HS.Common.Text",
-        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj",
+        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj",
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\obj\\",
+        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -285,7 +271,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -293,14 +279,14 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
               }
             }
           }
@@ -318,8 +304,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
@@ -331,20 +317,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -354,14 +326,14 @@
         }
       }
     },
-    "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj": {
+    "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj",
         "projectName": "HS.Discord.Core",
-        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj",
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Discord\\Core\\obj\\",
+        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -372,7 +344,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -380,17 +352,17 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Collection\\Collection.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\System\\System.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
               },
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\NuGet\\Common\\Text\\Text.csproj"
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj"
               }
             }
           }
@@ -408,8 +380,8 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Utf8JsonStreamReader": {
               "target": "Package",
@@ -427,20 +399,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.16, 8.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
