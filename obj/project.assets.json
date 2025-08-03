@@ -234,18 +234,9 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "Utf8JsonStreamReader/3.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Utf8JsonStreamReader.dll": {}
-        },
-        "runtime": {
-          "lib/net8.0/Utf8JsonStreamReader.dll": {}
-        }
-      },
       "HS.Common.Collection/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "compile": {
           "bin/placeholder/HS.Common.Collection.dll": {}
         },
@@ -255,7 +246,7 @@
       },
       "HS.Common.System/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "HS.Common.Collection": "1.0.0"
         },
@@ -264,36 +255,6 @@
         },
         "runtime": {
           "bin/placeholder/HS.Common.System.dll": {}
-        }
-      },
-      "HS.Common.Text/1.0.2": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "HS.Common.Collection": "1.0.0",
-          "HS.Common.System": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/HS.Common.Text.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HS.Common.Text.dll": {}
-        }
-      },
-      "HS.Discord.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "HS.Common.Collection": "1.0.0",
-          "HS.Common.System": "1.0.0",
-          "HS.Common.Text": "1.0.2",
-          "Utf8JsonStreamReader": "3.1.0"
-        },
-        "compile": {
-          "bin/placeholder/HS.Discord.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HS.Discord.Core.dll": {}
         }
       }
     }
@@ -705,19 +666,6 @@
         "version.txt"
       ]
     },
-    "Utf8JsonStreamReader/3.1.0": {
-      "sha512": "2FL5ibouGGPzOXsxZgNsBOrvSQmuCGaBdMs/oaVBP8cGXRFxayFqCkWToYRFsycIjQL0VujSvtPawRleR69rlg==",
-      "type": "package",
-      "path": "utf8jsonstreamreader/3.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "lib/net8.0/Utf8JsonStreamReader.dll",
-        "utf8jsonstreamreader.3.1.0.nupkg.sha512",
-        "utf8jsonstreamreader.nuspec"
-      ]
-    },
     "HS.Common.Collection/1.0.0": {
       "type": "project",
       "path": "../../HS/Libraries/Common/Collection/Common.Collection.csproj",
@@ -727,25 +675,12 @@
       "type": "project",
       "path": "../../HS/Libraries/Common/System/Common.System.csproj",
       "msbuildProject": "../../HS/Libraries/Common/System/Common.System.csproj"
-    },
-    "HS.Common.Text/1.0.2": {
-      "type": "project",
-      "path": "../../HS/Libraries/Common/Text/Common.Text.csproj",
-      "msbuildProject": "../../HS/Libraries/Common/Text/Common.Text.csproj"
-    },
-    "HS.Discord.Core/1.0.0": {
-      "type": "project",
-      "path": "../../HS/Libraries/Discord/Core/Discord.Core.csproj",
-      "msbuildProject": "../../HS/Libraries/Discord/Core/Discord.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "Discord.Net >= 3.17.4",
-      "HS.Common.Collection >= 1.0.0",
-      "HS.Common.System >= 1.0.0",
-      "HS.Common.Text >= 1.0.2",
-      "HS.Discord.Core >= 1.0.0"
+      "HS.Common.System >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -781,17 +716,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
-            },
             "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
               "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
-            },
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj"
-            },
-            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj": {
-              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Discord\\Core\\Discord.Core.csproj"
             }
           }
         }

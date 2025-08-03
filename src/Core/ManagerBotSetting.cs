@@ -3,22 +3,33 @@ using System.Text.Json.Serialization;
 
 public class ManagerBotSetting
 {
-    public static ManagerBotSetting Load(string filePath)
+    public static async ValueTask<ManagerBotSetting> LoadAsync()
     {
+        string filePath = PathHelper.settingFilePath;
+
         if (false == File.Exists(filePath))
-            return new ManagerBotSetting();
+        {
+            // 설정 파일이 존재하지 않으면 기본 설정을 생성
+            await SaveAsync(new ManagerBotSetting());
+            throw new FileNotFoundException("설정 파일이 존재하지 않습니다.", filePath);
+        }
 
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
+        return (await JsonSerializer.DeserializeAsync<ManagerBotSetting>(fileStream, new JsonSerializerOptions { WriteIndented = true }))!;
+    }
+    public static async ValueTask SaveAsync(ManagerBotSetting setting)
+    {
+        string filePath = PathHelper.settingFilePath;
 
-        return JsonSerializer.Deserialize<ManagerBotSetting>(fileStream)!;
+        using FileStream fileStream = new(filePath, FileMode.Create, FileAccess.Write);
+        await JsonSerializer.SerializeAsync(fileStream, setting, new JsonSerializerOptions { WriteIndented = true });
     }
 
     [JsonInclude]
-    [JsonPropertyName("BotToken")]
-    string? _BotToken { get => botToken; init => botToken = value?? throw new ArgumentNullException(nameof(value), "BotToken은 null일 수 없습니다."); }
-    string? botToken;
-    public string BotToken => botToken?? throw new InvalidOperationException("BotToken이 설정되지 않았습니다.");
+    [JsonPropertyName("botToken")]
+    public string BotToken { get; private init; } = string.Empty;
 
-
-    public ulong GuildId { get; private init; }
+    [JsonInclude]
+    [JsonPropertyName("guildId")]
+    public ulong GuildId { get; private init; } = 0;
 }
