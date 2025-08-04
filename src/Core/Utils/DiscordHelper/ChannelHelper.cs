@@ -1,5 +1,8 @@
+using Discord;
+using Discord.Rest;
 using Discord.WebSocket;
-using ManagerBot.Core;
+
+namespace ManagerBot.Core.Utils.DiscordHelper;
 
 public static class ChannelHelper
 {
@@ -24,5 +27,11 @@ public static class ChannelHelper
             throw new InvalidOperationException($"ID '{id}'에 해당하는 음성 채널을 찾을 수 없습니다.");
 
         return channel;
+    }
+
+    public static Task<RestTextChannel> CreateTextChannel(string name,
+        Action<TextChannelProperties>? func = null, RequestOptions? options = null)
+    {
+        return ManagerBotCore.Guild.CreateTextChannelAsync(name, func, options);
     }
 }

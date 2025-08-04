@@ -1,13 +1,12 @@
-using Discord;
-using Discord.Rest;
 using Discord.WebSocket;
+
+using ManagerBot.Core.Utils.DiscordHelper;
 
 namespace ManagerBot.Core.Utils.WaitingVoiceChannelUtils;
 
 public class WaitingVoiceChannel
 {
-    public static List<WaitingVoiceChannel> waitingVoiceChannels = new(1);
-    public static List<SocketVoiceChannel> privateWaitingVoiceChannels = new(1);
+    public static List<WaitingVoiceChannel> instances = new(1);
 
 
     [OnBotInitializeMethod]
@@ -17,29 +16,48 @@ public class WaitingVoiceChannel
     }
     static Task UserVoiceStateUpdated(SocketUser user, SocketVoiceState before, SocketVoiceState after)
     {
+        if (after.VoiceChannel == null)
+            return Task.CompletedTask;
+
         ulong joinedChannelId = after.VoiceChannel.Id;
         WaitingVoiceChannel? waitingVoiceChannel = WaitingVoiceChannel.Find(joinedChannelId);
         if (waitingVoiceChannel == null)
             return Task.CompletedTask;
 
-        waitingVoiceChannel.voiceChannel = after.VoiceChannel;
-        return waitingVoiceChannel.MoveToNewPrivateChannel((SocketGuildUser)user).AsTask();
+        return PrivateWaitingVoiceChannel.MoveToNewPrivateChannel(waitingVoiceChannel, (SocketGuildUser)user).AsTask();
     }
 
     static WaitingVoiceChannel? Find(ulong voiceChannelId)
     {
-        for (int i = 0; i < waitingVoiceChannels.Count; i++)
+        if (voiceChannelId == 0)
+            return null;
+
+        int min = 0;
+        int max = instances.Count - 1;
+
+        while (min <= max)
         {
-            WaitingVoiceChannel waitingVoiceChannel = waitingVoiceChannels[i];
+            int mid = (min + max) >> 1;
+            WaitingVoiceChannel waitingVoiceChannel = instances[mid];
             if (waitingVoiceChannel.voiceChannel.Id == voiceChannelId)
                 return waitingVoiceChannel;
+
+            if (waitingVoiceChannel.voiceChannel.Id < voiceChannelId)
+            {
+                min = mid + 1;
+            }
+            else
+            {
+                max = mid - 1;
+            }
         }
+
         return null;
     }
     public static WaitingVoiceChannel Add(SocketVoiceChannel voiceChannel)
     {
         WaitingVoiceChannel channel = new WaitingVoiceChannel(voiceChannel);
-        waitingVoiceChannels.Add(channel);
+        instances.Add(channel);
         return channel;
     }
     public static WaitingVoiceChannel Add(ulong voiceChannelId)
@@ -47,52 +65,12 @@ public class WaitingVoiceChannel
 
 
 
-    SocketVoiceChannel voiceChannel;
-    List<PrivateWaitingVoiceChannel> privateChannels = new();
+    public readonly SocketVoiceChannel voiceChannel;
 
     public Func<PrivateWaitingVoiceChannel, ValueTask>? onPrivateChannelCreated;
 
-    public WaitingVoiceChannel(SocketVoiceChannel voiceChannel)
+    WaitingVoiceChannel(SocketVoiceChannel voiceChannel)
     {
         this.voiceChannel = voiceChannel;
-    }
-
-    public async ValueTask MoveToNewPrivateChannel(SocketGuildUser targetUser)
-    {
-        Overwrite[] overwriteBuffer = PermissionHelper.RentSingleOverwriteBuffer();
-        overwriteBuffer[0] = new Overwrite(
-            targetUser.Id,
-            PermissionTarget.User,
-            PermissionHelper.denyAllPermissions.Modify(
-                viewChannel: PermValue.Allow,
-                connect: PermValue.Allow
-            )
-        );
-        RestVoiceChannel privateVoiceChannel = await ManagerBotCore.Guild.CreateVoiceChannelAsync(
-            $"{voiceChannel.Name} ({targetUser.DisplayName})",
-            properties =>
-            {
-                properties.CategoryId = voiceChannel.Category?.Id;
-                properties.Position = voiceChannel.Position;
-                properties.PermissionOverwrites = overwriteBuffer;
-                PermissionHelper.ReturnSingleOverwriteBuffer(overwriteBuffer);
-                properties.UserLimit = 1;
-            }
-        );
-        await targetUser.ModifyAsync(
-            properties =>
-            {
-                properties.Channel = voiceChannel;
-            }
-        );
-        if (onPrivateChannelCreated != null)
-        {
-            await onPrivateChannelCreated.Invoke(
-                new PrivateWaitingVoiceChannel(
-                    privateVoiceChannel,
-                    targetUser
-                )
-            );
-        }
     }
 }

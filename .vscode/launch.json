@@ -6,6 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Debug/net9.0/ManagerBot.dll",
+            "console": "externalTerminal",
             "args":[
                 "C:/Users/comet/Documents/ManagerBot"
             ]

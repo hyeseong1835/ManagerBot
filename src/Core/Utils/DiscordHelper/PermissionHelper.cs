@@ -1,5 +1,7 @@
 using Discord;
 
+namespace ManagerBot.Core.Utils.DiscordHelper;
+
 public static class PermissionHelper
 {
     public static readonly OverwritePermissions allowAllPermissions = new OverwritePermissions(

@@ -41,6 +41,10 @@ public abstract class PriorityMethodAttribute : Attribute
             {
                 await (Task)methodInfo.Invoke(null, null);
             }
+            else if (methodInfo.ReturnType == typeof(ValueTask))
+            {
+                await ((ValueTask)methodInfo.Invoke(null, null)!);
+            }
             else if (methodInfo.ReturnType == typeof(void))
             {
                 methodInfo.Invoke(null, null);
@@ -91,6 +95,10 @@ public abstract class PriorityMethodAttribute<TParam> : Attribute
             {
                 await (Task)methodInfo.Invoke(null, [ param ]);
             }
+            else if (methodInfo.ReturnType == typeof(ValueTask))
+            {
+                await ((ValueTask)methodInfo.Invoke(null, [ param ])!);
+            }
             else if (methodInfo.ReturnType == typeof(void))
             {
                 methodInfo.Invoke(null, [ param ]);
@@ -140,6 +148,10 @@ public abstract class PriorityMethodAttribute<TParam1, TParam2> : Attribute
             if (methodInfo.ReturnType == typeof(Task))
             {
                 await (Task)methodInfo.Invoke(null, [ param1, param2 ]);
+            }
+            else if (methodInfo.ReturnType == typeof(ValueTask))
+            {
+                await ((ValueTask)methodInfo.Invoke(null, [ param1, param2 ])!);
             }
             else if (methodInfo.ReturnType == typeof(void))
             {

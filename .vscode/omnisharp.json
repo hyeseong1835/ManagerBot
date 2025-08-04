@@ -1,0 +1,15 @@
+{
+  "FormattingOptions": {
+    "useTabs": false,
+    "tabSize": 4,
+
+    "indentSwitchCaseSection": true,
+    "indentCaseLabels": true,
+
+    "indentBlock": true,
+
+    "newLinesForBracesInMethods": true,
+    "newLinesForBracesInTypes": true,
+    "newLinesForBracesInProperties": true
+  }
+}

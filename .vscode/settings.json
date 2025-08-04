@@ -1,0 +1,27 @@
+{
+    "terminal.integrated.hideOnStartup": "always",
+    "[csharp]": {
+        "editor.acceptSuggestionOnEnter": "off",
+        "editor.inlineSuggest.edits.allowCodeShifting": "never",
+        "editor.inlineSuggest.showToolbar": "always",
+    },
+    "omnisharp.projectFilesExcludePattern": "**/.git/**, **/BackUp/**",
+    "csharp.format.enable": false,
+    "omnisharp.useEditorFormattingSettings": false,
+
+
+
+    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": false,
+    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForIndexerParameters": false,
+    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForLiteralParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForObjectCreationParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForOtherParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForParameters": true,
+    "csharp.inlayHints.enableInlayHintsForTypes": false,
+    "dotnet.inlayHints.suppressInlayHintsForParametersThatDifferOnlyBySuffix": true,
+    "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchArgumentName": true,
+    "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchMethodIntent": false,
+    "omnisharp.enableEditorConfigSupport": true,
+}

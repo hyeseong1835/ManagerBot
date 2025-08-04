@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj": {}
+    "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj": {}
   },
   "projects": {
-    "c:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj": {
+    "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
+        "projectUniqueName": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
         "projectName": "ManagerBot",
-        "projectPath": "c:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
+        "projectPath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\obj\\",
+        "outputPath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
