@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 using Discord;
@@ -26,7 +25,8 @@ public class Feature_ManagerBotDebug : Feature
     public static Feature_ManagerBotDebug Instance => instance!;
 
     // 커스텀 아이디
-    public const string CustomId_Button_PannelUpdate = "managerbotdebug/pannel-update";
+    public const string customId_Button_PannelUpdate = "managerbotdebug/pannel-update";
+
 
     ManagerBotDebugSetting? setting;
 
@@ -99,7 +99,7 @@ public class Feature_ManagerBotDebug : Feature
 
         ManagerBotCore.client.ButtonExecuted += async (SocketMessageComponent component) =>
         {
-            if (component.Data.CustomId == Feature_ManagerBotDebug.CustomId_Button_PannelUpdate)
+            if (component.Data.CustomId == Feature_ManagerBotDebug.customId_Button_PannelUpdate)
             {
                 await instance.PannelUpdateAsync();
                 await component.AutoRemoveRespondAsync();
@@ -126,7 +126,7 @@ public class Feature_ManagerBotDebug : Feature
                 msg.Content = null;
                 msg.Embed = new EmbedBuilder()
                 {
-                    Title = "매니저봇 디버그 패널",
+                  Title = "매니저봇 디버그 패널",
                     Fields = [
                         new EmbedFieldBuilder()
                         {
@@ -155,8 +155,8 @@ public class Feature_ManagerBotDebug : Feature
                             Components = [
                                 new ButtonBuilder()
                                 {
-                                    CustomId = Feature_ManagerBotDebug.CustomId_Button_PannelUpdate,
-                                    Label = "패널 업데이트",
+                                    CustomId = Feature_ManagerBotDebug.customId_Button_PannelUpdate,
+                                    Label = "새로고침",
                                     Style = ButtonStyle.Primary,
                                     // Emote = new Emote(0x1F501, "repeat", false), // 🔁
                                     IsDisabled = false

@@ -56,6 +56,7 @@ public abstract class PriorityMethodAttribute : Attribute
         }
     }
 }
+
 [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
 public abstract class PriorityMethodAttribute<TParam> : Attribute
 {
@@ -110,6 +111,7 @@ public abstract class PriorityMethodAttribute<TParam> : Attribute
         }
     }
 }
+
 [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
 public abstract class PriorityMethodAttribute<TParam1, TParam2> : Attribute
 {
@@ -230,6 +232,7 @@ public abstract class PriorityMethodQueue
         await Invoke();
     }
 }
+
 public class PriorityMethodQueue<TAttribute> : PriorityMethodQueue
     where TAttribute : PriorityMethodAttribute
 {
