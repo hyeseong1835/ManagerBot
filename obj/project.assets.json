@@ -256,6 +256,20 @@
         "runtime": {
           "bin/placeholder/HS.Common.System.dll": {}
         }
+      },
+      "HS.Common.Text/1.0.2": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "HS.Common.Collection": "1.0.0",
+          "HS.Common.System": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HS.Common.Text.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HS.Common.Text.dll": {}
+        }
       }
     }
   },
@@ -675,12 +689,18 @@
       "type": "project",
       "path": "../../HS/Libraries/Common/System/Common.System.csproj",
       "msbuildProject": "../../HS/Libraries/Common/System/Common.System.csproj"
+    },
+    "HS.Common.Text/1.0.2": {
+      "type": "project",
+      "path": "../../HS/Libraries/Common/Text/Common.Text.csproj",
+      "msbuildProject": "../../HS/Libraries/Common/Text/Common.Text.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "Discord.Net >= 3.17.4",
-      "HS.Common.System >= 1.0.0"
+      "HS.Common.System >= 1.0.0",
+      "HS.Common.Text >= 1.0.2"
     ]
   },
   "packageFolders": {
@@ -718,6 +738,9 @@
           "projectReferences": {
             "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
               "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
+            },
+            "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Text\\Common.Text.csproj"
             }
           }
         }

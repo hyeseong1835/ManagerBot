@@ -36,9 +36,9 @@ public class MachineInfo_Laptop : MachineInfo
             Name = "Laptop 머신 정보",
             Value = $"운영체제: {OperatingSystemName}" +
                     $"\nCPU: {ProcessorCount} 코어" +
-                    $"\nCPU 사용 시간: {Environment.CpuUsage.TotalTime}" +
-                    $"\n메모리: {MemorySizeUtility.BToGB(AvailableMemory)}/{MemorySizeUtility.BToGB(TotalMemory)} GB" +
-                    $"\n디스크: {MemorySizeUtility.BToGB(AvailableDiskSpace)}/{MemorySizeUtility.BToGB(TotalDiskSpace)} GB"
+                    $"\nCPU 사용 시간: {TotalCpuTime.Hours}시간 {TotalCpuTime.Minutes}분 {TotalCpuTime.Seconds}초" +
+                      $"\n메모리: {(MemorySizeUtility.BToGiB(UsedMemory)).ToString("N2")} GiB / {MemorySizeUtility.BToGiB(TotalMemory).ToString("N2")} GiB" +
+                      $"\n디스크: {MemorySizeUtility.BToGiB(UsedDiskSpace).ToString("N2")} GiB / {MemorySizeUtility.BToGiB(TotalDiskSpace).ToString("N2")} GiB"
         };
     }
 }

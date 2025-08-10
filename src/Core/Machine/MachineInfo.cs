@@ -30,7 +30,9 @@ public abstract class MachineInfo
 
     public virtual PlatformID PlatformID => Environment.OSVersion.Platform;
     public virtual int ProcessorCount => Environment.ProcessorCount;
+    public virtual TimeSpan TotalCpuTime => Environment.CpuUsage.TotalTime;
 
+    public virtual long UsedDiskSpace => AvailableDiskSpace - TotalDiskSpace;
     public virtual long AvailableDiskSpace => driveInfo.AvailableFreeSpace;
     public virtual long TotalDiskSpace => driveInfo.TotalSize;
 
@@ -41,6 +43,8 @@ public abstract class MachineInfo
 
 
     public abstract MachineType MachineType { get; }
+
+    public virtual ulong UsedMemory => TotalMemory - AvailableMemory;
     public abstract ulong AvailableMemory { get; }
     public abstract ulong TotalMemory { get; }
 
@@ -56,7 +60,6 @@ public abstract class MachineInfo
     public void UpdateMachineInfo()
     {
         Update();
-
 
         LastUpdateUtcTime = DateTime.UtcNow;
     }

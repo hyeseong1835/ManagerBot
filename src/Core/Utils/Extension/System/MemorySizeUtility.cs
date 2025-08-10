@@ -3,125 +3,125 @@ using System.Runtime.CompilerServices;
 public static class MemorySizeUtility
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float BToKB(float b)
+    public static float BToKiB(float b)
     {
         return b / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float BToMB(float b)
+    public static float BToMiB(float b)
     {
         return b / 1024f / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float BToGB(float b)
+    public static float BToGiB(float b)
     {
         return b / 1024f / 1024f / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float BToTB(float b)
+    public static float BToTiB(float b)
     {
         return b / 1024f / 1024f / 1024f / 1024f;
     }
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float KBToB(float kb)
+    public static float KiBToB(float KiB)
     {
-        return kb * 1024f;
+        return KiB * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float KBToMB(float kb)
+    public static float KiBToMiB(float KiB)
     {
-        return kb / 1024f;
+        return KiB / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float KBToGB(float kb)
+    public static float KiBToGiB(float KiB)
     {
-        return kb / 1024f / 1024f;
+        return KiB / 1024f / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float KBToTB(float kb)
+    public static float KiBToTiB(float KiB)
     {
-        return kb / 1024f / 1024f / 1024f;
-    }
-
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float MBToB(float mb)
-    {
-        return mb * 1024f * 1024f;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float MBToKB(float mb)
-    {
-        return mb * 1024f;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float MBToGB(float mb)
-    {
-        return mb / 1024f;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float MBToTB(float mb)
-    {
-        return mb / 1024f / 1024f;
+        return KiB / 1024f / 1024f / 1024f;
     }
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float GBToB(float gb)
+    public static float MiBToB(float MiB)
     {
-        return gb * 1024f * 1024f * 1024f;
+        return MiB * 1024f * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float GBToKB(float gb)
+    public static float MiBToKiB(float MiB)
     {
-        return gb * 1024f * 1024f;
+        return MiB * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float GBToMB(float gb)
+    public static float MiBToGiB(float MiB)
     {
-        return gb * 1024f;
+        return MiB / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float GBToTB(float gb)
+    public static float MiBToTiB(float MiB)
     {
-        return gb / 1024f;
+        return MiB / 1024f / 1024f;
+    }
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float GiBToB(float GiB)
+    {
+        return GiB * 1024f * 1024f * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float TBToB(float tb)
+    public static float GiBToKiB(float GiB)
     {
-        return tb * 1024f * 1024f * 1024f * 1024f;
+        return GiB * 1024f * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float TBToKB(float tb)
+    public static float GiBToMiB(float GiB)
     {
-        return tb * 1024f * 1024f * 1024f;
+        return GiB * 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float TBToMB(float tb)
+    public static float GiBToTiB(float GiB)
     {
-        return tb * 1024f * 1024f;
+        return GiB / 1024f;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float TBToGB(float tb)
+    public static float TiBToB(float TiB)
     {
-        return tb * 1024f;
+        return TiB * 1024f * 1024f * 1024f * 1024f;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float TiBToKiB(float TiB)
+    {
+        return TiB * 1024f * 1024f * 1024f;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float TiBToMiB(float TiB)
+    {
+        return TiB * 1024f * 1024f;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float TiBToGiB(float TiB)
+    {
+        return TiB * 1024f;
     }
 }
