@@ -140,15 +140,7 @@ public class Feature_ManagerBotDebug : Feature
                             Name = "핑",
                             Value = $"{ManagerBotCore.client.Latency}ms"
                         },
-                        new EmbedFieldBuilder()
-                        {
-                            Name = "리소스 사용량",
-                            Value = $"메모리: {GC.GetTotalMemory(false) / 1024 / 1024}MB"
-                                  + $"\nCPU 사용량: {Environment.CpuUsage.TotalTime}"
-                                  + $"\nCPU 코어 수: {Environment.ProcessorCount}개"
-                                  + $"\n저장 공간: {MemorySizeUtility.BToGB(Program.driveInfo.AvailableFreeSpace)}GB"
-                                  + $"\n운영체제: {Environment.OSVersion}`"
-                        }
+                        Program.machineInfo.GetMachineInfoEmbedFieldBuilder()
 
                     ],
                     Color = Color.Blue,
