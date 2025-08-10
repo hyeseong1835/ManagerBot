@@ -5,6 +5,7 @@ using Discord.Rest;
 using Discord.WebSocket;
 
 using ManagerBot.Core.Utils.DiscordHelper;
+using ManagerBot.Utils.PriorityMethod;
 
 namespace ManagerBot.Core.Features.ManagerBotDebugFeature;
 
@@ -50,7 +51,7 @@ public class Feature_ManagerBotDebug : Feature
         dashboardChannel = ChannelHelper.GetTextChannel(setting.DashboardChannelId);
     }
 
-    [OnBotInitializeMethod(Feature.featureInitializePriority + 1)]
+    [OnBotInitializeMethod(Feature.featureInitializePriority + 1, PriorityMethodOption.NonAwait)]
     static async ValueTask AfterFeatureInitialize()
     {
         Feature_ManagerBotDebug instance = Feature_ManagerBotDebug.instance!;

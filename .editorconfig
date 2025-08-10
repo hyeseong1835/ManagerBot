@@ -14,5 +14,5 @@ dotnet_diagnostic.IDE0047.severity = none
 # [ IDE0300 ] 컬렉션 초기화를 단순화할 수 있습니다.
 dotnet_diagnostic.IDE0300.severity = none
 
-
 csharp_indent_switch_labels = true
+csharp_indent_case_contents = false

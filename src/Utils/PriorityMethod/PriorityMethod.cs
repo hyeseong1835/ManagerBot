@@ -1,28 +1,38 @@
-#pragma warning disable CS8600 // null 리터럴 또는 가능한 null 값을 null을 허용하지 않는 형식으로 변환하는 중입니다.
-#pragma warning disable CS8602 // null 가능 참조에 대한 역참조입니다.
-
 using System.Reflection;
+
+namespace ManagerBot.Utils.PriorityMethod;
 
 [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
 public abstract class PriorityMethodAttribute : Attribute
 {
     public int priority;
+    public PriorityMethodOption option;
 
-    public PriorityMethodAttribute(int priority = 100)
+    public PriorityMethodAttribute(int priority, PriorityMethodOption option)
     {
         this.priority = priority;
+        this.option = option;
     }
     public static async Task FindAndInvoke<TAttribute>()
         where TAttribute : PriorityMethodAttribute
+        => await FindAndInvoke<TAttribute>(AppDomain.CurrentDomain.GetAssemblies());
+
+    public static async Task FindAndInvoke<TAttribute>(Assembly[] assemblies)
+        where TAttribute : PriorityMethodAttribute
         => await FindAndInvoke<TAttribute>(
-            AppDomain.CurrentDomain.GetAssemblies()
+            assemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
         );
+
+    public static async Task FindAndInvoke<TAttribute>(IEnumerable<Type> types)
+        where TAttribute : PriorityMethodAttribute
+        => await FindAndInvoke<TAttribute>(types);
+
     public static async Task FindAndInvoke<TAttribute>(IEnumerable<MethodInfo> methodInfos)
         where TAttribute : PriorityMethodAttribute
     {
-        PriorityQueue<MethodInfo, int> queue = new();
+        PriorityQueue<PriorityMethodInfo, int> queue = new();
 
         foreach (MethodInfo method in methodInfos)
         {
@@ -30,28 +40,77 @@ public abstract class PriorityMethodAttribute : Attribute
 
             if (attribute == null) continue;
 
-            queue.Enqueue(method, attribute.priority);
+            queue.Enqueue(new(method, attribute), attribute.priority);
         }
 
-        for (;;)
+        while (queue.TryDequeue(out PriorityMethodInfo methodInfo, out int priority))
         {
-            if (!queue.TryDequeue(out MethodInfo? methodInfo, out int priority)) break;
+            switch (methodInfo.attribute.option)
+            {
+                case PriorityMethodOption.Auto:
+                {
+                    switch (methodInfo.info.ReturnType)
+                    {
+                        case Type t when t == typeof(ValueTask):
+                        {
+                            await (ValueTask)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
 
-            if (methodInfo.ReturnType == typeof(Task))
-            {
-                await (Task)methodInfo.Invoke(null, null);
-            }
-            else if (methodInfo.ReturnType == typeof(ValueTask))
-            {
-                await ((ValueTask)methodInfo.Invoke(null, null)!);
-            }
-            else if (methodInfo.ReturnType == typeof(void))
-            {
-                methodInfo.Invoke(null, null);
-            }
-            else
-            {
-                Console.WriteLine($"[ ERROR ] {methodInfo.DeclaringType?.Name}/{methodInfo.Name}의 반환 형식({methodInfo.ReturnType})이 잘못되었습니다.");
+                        case Type t when t == typeof(Task):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
+
+                        case Type t when typeof(Task).IsAssignableFrom(t):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
+
+                        default:
+                        {
+                            methodInfo.info.Invoke(null, null);
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                case PriorityMethodOption.NonAwait:
+                {
+                    methodInfo.info.Invoke(null, null);
+                    break;
+                }
+
+                case PriorityMethodOption.Await:
+                {
+                    switch (methodInfo.info.ReturnType)
+                    {
+                        case Type t when t == typeof(ValueTask):
+                        {
+                            await (ValueTask)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
+
+                        case Type t when t == typeof(Task):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
+
+                        case Type t when typeof(Task).IsAssignableFrom(t):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, null)!;
+                            break;
+                        }
+
+                        default:
+                            throw new InvalidOperationException($"Method {methodInfo.info.Name}의 반환 형식은 대기할 수 없습니다.");
+                    }
+                    break;
+                }
             }
         }
     }
@@ -61,23 +120,38 @@ public abstract class PriorityMethodAttribute : Attribute
 public abstract class PriorityMethodAttribute<TParam> : Attribute
 {
     public int priority;
+    public PriorityMethodOption option;
 
-    public PriorityMethodAttribute(int priority = 100)
+    public PriorityMethodAttribute(int priority = 100, PriorityMethodOption option = PriorityMethodOption.Auto)
     {
         this.priority = priority;
+        this.option = option;
     }
+
     public static async Task FindAndInvoke<TAttribute>(TParam param)
         where TAttribute : PriorityMethodAttribute<TParam>
         => await FindAndInvoke<TAttribute>(
+            param,
             AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)),
-            param
         );
-    public static async Task FindAndInvoke<TAttribute>(IEnumerable<MethodInfo> methodInfos, TParam param)
+
+    public static async Task FindAndInvoke<TAttribute>(TParam param, Assembly[] assemblies)
+        where TAttribute : PriorityMethodAttribute<TParam>
+        => await FindAndInvoke<TAttribute>(
+            param,
+            assemblies
+                .SelectMany(assembly => assembly.GetTypes())
+                .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+        );
+
+    public static async Task FindAndInvoke<TAttribute>(TParam param, IEnumerable<Type> types)
+        where TAttribute : PriorityMethodAttribute<TParam>
+        => await FindAndInvoke<TAttribute>(param, types);
+
+    public static async Task FindAndInvoke<TAttribute>(TParam param, IEnumerable<MethodInfo> methodInfos)
         where TAttribute : PriorityMethodAttribute<TParam>
     {
-        PriorityQueue<MethodInfo, int> queue = new();
+        PriorityQueue<PriorityMethodInfo<TParam>, int> queue = new();
 
         foreach (MethodInfo method in methodInfos)
         {
@@ -85,170 +159,83 @@ public abstract class PriorityMethodAttribute<TParam> : Attribute
 
             if (attribute == null) continue;
 
-            queue.Enqueue(method, attribute.priority);
+            queue.Enqueue(new(method, attribute), attribute.priority);
         }
 
-        for (;;)
+        if (queue.Count == 0)
+            return;
+
+        object?[]? paramArray = [ param ];
+
+        while (queue.TryDequeue(out PriorityMethodInfo<TParam> methodInfo, out int priority))
         {
-            if (!queue.TryDequeue(out MethodInfo? methodInfo, out int priority)) break;
-
-            if (methodInfo.ReturnType == typeof(Task))
+            switch (methodInfo.attribute.option)
             {
-                await (Task)methodInfo.Invoke(null, [ param ]);
+                case PriorityMethodOption.Auto:
+                {
+                    switch (methodInfo.info.ReturnType)
+                    {
+                        case Type t when t == typeof(ValueTask):
+                        {
+                            await (ValueTask)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        case Type t when t == typeof(Task):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        case Type t when typeof(Task).IsAssignableFrom(t):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        default:
+                        {
+                            methodInfo.info.Invoke(null, paramArray);
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                case PriorityMethodOption.NonAwait:
+                {
+                    methodInfo.info.Invoke(null, paramArray);
+                    break;
+                }
+
+                case PriorityMethodOption.Await:
+                {
+                    switch (methodInfo.info.ReturnType)
+                    {
+                        case Type t when t == typeof(ValueTask):
+                        {
+                            await (ValueTask)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        case Type t when t == typeof(Task):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        case Type t when typeof(Task).IsAssignableFrom(t):
+                        {
+                            await (Task)methodInfo.info.Invoke(null, paramArray)!;
+                            break;
+                        }
+
+                        default:
+                            throw new InvalidOperationException($"Method {methodInfo.info.Name}의 반환 형식은 대기할 수 없습니다.");
+                    }
+                    break;
+                }
             }
-            else if (methodInfo.ReturnType == typeof(ValueTask))
-            {
-                await ((ValueTask)methodInfo.Invoke(null, [ param ])!);
-            }
-            else if (methodInfo.ReturnType == typeof(void))
-            {
-                methodInfo.Invoke(null, [ param ]);
-            }
-            else
-            {
-                Console.WriteLine($"[ ERROR ] {methodInfo.DeclaringType?.Name}/{methodInfo.Name}의 반환 형식({methodInfo.ReturnType})이 잘못되었습니다.");
-            }
-        }
-    }
-}
-
-[AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-public abstract class PriorityMethodAttribute<TParam1, TParam2> : Attribute
-{
-    public int priority;
-
-    public PriorityMethodAttribute(int priority = 100)
-    {
-        this.priority = priority;
-    }
-    public static async Task FindAndInvoke<TAttribute>(TParam1 param1, TParam2 param2)
-        where TAttribute : PriorityMethodAttribute
-        => await FindAndInvoke<TAttribute>(
-            AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)),
-            param1, param2
-        );
-    public static async Task FindAndInvoke<TAttribute>(IEnumerable<MethodInfo> methodInfos, TParam1 param1, TParam2 param2)
-        where TAttribute : PriorityMethodAttribute
-    {
-        PriorityQueue<MethodInfo, int> queue = new();
-
-        foreach (MethodInfo method in methodInfos)
-        {
-            TAttribute? attribute = method.GetCustomAttribute<TAttribute>();
-
-            if (attribute == null) continue;
-
-            queue.Enqueue(method, attribute.priority);
-        }
-
-        for (;;)
-        {
-            if (!queue.TryDequeue(out MethodInfo? methodInfo, out int priority)) break;
-
-            if (methodInfo.ReturnType == typeof(Task))
-            {
-                await (Task)methodInfo.Invoke(null, [ param1, param2 ]);
-            }
-            else if (methodInfo.ReturnType == typeof(ValueTask))
-            {
-                await ((ValueTask)methodInfo.Invoke(null, [ param1, param2 ])!);
-            }
-            else if (methodInfo.ReturnType == typeof(void))
-            {
-                methodInfo.Invoke(null, [ param1, param2 ]);
-            }
-            else
-            {
-                Console.WriteLine($"[ ERROR ] {methodInfo.DeclaringType?.Name}/{methodInfo.Name}의 반환 형식({methodInfo.ReturnType})이 잘못되었습니다.");
-            }
-        }
-    }
-}
-
-public abstract class PriorityMethodQueue
-{
-    public static void BulkFind(params PriorityMethodQueue[] attributes)
-        => BulkFind(
-            AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)),
-            attributes
-        );
-
-    public static void BulkFind(IEnumerable<MethodInfo> methodInfos, params PriorityMethodQueue[] attributes)
-    {
-        foreach (MethodInfo method in methodInfos)
-        {
-            PriorityMethodAttribute? attribute = method.GetCustomAttribute<PriorityMethodAttribute>();
-
-            if (attribute == null) continue;
-
-            for (int i = 0; i < attributes.Length; i++)
-            {
-                PriorityMethodQueue queue = attributes[i];
-                if (attribute.GetType() != queue.attributeType) continue;
-
-                if (queue.queue == null) queue.queue = new();
-                queue.queue.Enqueue(method, attribute.priority);
-                break;
-            }
-        }
-    }
-
-    public abstract Type attributeType { get; }
-    public PriorityQueue<MethodInfo, int>? queue;
-
-    public abstract void Find(IEnumerable<MethodInfo> methodInfos);
-    public void Find() => Find(
-        AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .SelectMany(type => type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
-    );
-    public async Task Invoke()
-    {
-        for (; ; )
-        {
-            if (!queue.TryDequeue(out MethodInfo? methodInfo, out int priority)) break;
-
-            if (methodInfo.ReturnType == typeof(Task))
-            {
-                await (Task)methodInfo.Invoke(null, null);
-            }
-            else if (methodInfo.ReturnType == typeof(void))
-            {
-                methodInfo.Invoke(null, null);
-            }
-            else
-            {
-                Console.WriteLine($"[ ERROR ] {methodInfo.DeclaringType?.Name}/{methodInfo.Name}의 반환 형식({methodInfo.ReturnType})이 잘못되었습니다.");
-            }
-        }
-    }
-    public async Task FindAndInvoke()
-    {
-        Find();
-        await Invoke();
-    }
-}
-
-public class PriorityMethodQueue<TAttribute> : PriorityMethodQueue
-    where TAttribute : PriorityMethodAttribute
-{
-    public override Type attributeType => typeof(TAttribute);
-
-    public override void Find(IEnumerable<MethodInfo> methodInfos)
-    {
-        if (queue == null) queue = new();
-
-        foreach (MethodInfo method in methodInfos)
-        {
-            TAttribute? attribute = method.GetCustomAttribute<TAttribute>();
-
-            if (attribute == null) continue;
-
-            queue.Enqueue(method, attribute.priority);
         }
     }
 }

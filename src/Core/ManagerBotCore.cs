@@ -1,17 +1,18 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using ManagerBot.Utils.PriorityMethod;
 
 namespace ManagerBot.Core;
 
 public class OnBotInitializeMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotInitializeMethodAttribute(int priority = 100) : base(priority) { }
+    public OnBotInitializeMethodAttribute(int priority = 100, PriorityMethodOption option = PriorityMethodOption.Auto) : base(priority, option) { }
 }
 
 public class OnBotStopMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotStopMethodAttribute(int priority = 100) : base(priority) { }
+    public OnBotStopMethodAttribute(int priority = 100, PriorityMethodOption option = PriorityMethodOption.Auto) : base(priority, option) { }
 }
 
 public static class ManagerBotCore
