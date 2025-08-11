@@ -1,8 +1,9 @@
 using Discord.WebSocket;
 
-using ManagerBot.Core.Utils.DiscordHelper;
+using ManagerBot.Core;
+using ManagerBot.Utils.DiscordHelper;
 
-namespace ManagerBot.Core.Utils.WaitingVoiceChannelUtils;
+namespace ManagerBot.Utils.WaitingVoiceChannelUtils;
 
 public class WaitingVoiceChannel
 {

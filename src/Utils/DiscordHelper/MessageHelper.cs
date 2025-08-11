@@ -1,7 +1,7 @@
 using Discord;
 using Discord.WebSocket;
 
-namespace ManagerBot.Core.Utils.DiscordHelper;
+namespace ManagerBot.Utils.DiscordHelper;
 
 public class MessageHelper
 {

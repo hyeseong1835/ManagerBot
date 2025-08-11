@@ -1,6 +1,6 @@
 using Discord;
 
-namespace ManagerBot.Core.Utils.DiscordHelper;
+namespace ManagerBot.Utils.DiscordHelper;
 
 public static class PermissionHelper
 {

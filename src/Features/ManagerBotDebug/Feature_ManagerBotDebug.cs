@@ -4,10 +4,10 @@ using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
 
-using ManagerBot.Core.Utils.DiscordHelper;
+using ManagerBot.Utils.DiscordHelper;
 using ManagerBot.Utils.PriorityMethod;
 
-namespace ManagerBot.Core.Features.ManagerBotDebugFeature;
+namespace ManagerBot.Features.ManagerBotDebugFeature;
 
 public class ManagerBotDebugSetting
 {

@@ -1,6 +1,6 @@
 using ManagerBot.Core;
 
-namespace ManagerBot.Core.Utils.DiscordHelper;
+namespace ManagerBot.Utils.DiscordHelper;
 
 public struct RoleCreateData
 {

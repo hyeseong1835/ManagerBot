@@ -111,7 +111,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj": {
+                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\Common.System.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -158,6 +162,7 @@
         "packagesPath": "C:\\Users\\comet\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\System\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
@@ -177,11 +182,7 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {
-              "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj": {
-                "projectPath": "C:\\Users\\comet\\Documents\\Dev\\HS\\Libraries\\Common\\Collection\\Common.Collection.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {

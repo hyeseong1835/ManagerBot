@@ -1,9 +1,11 @@
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
-using ManagerBot.Core.Utils.DiscordHelper;
 
-namespace ManagerBot.Core.Utils.WaitingVoiceChannelUtils;
+using ManagerBot.Core;
+using ManagerBot.Utils.DiscordHelper;
+
+namespace ManagerBot.Utils.WaitingVoiceChannelUtils;
 
 public struct PrivateWaitingVoiceChannel
 {

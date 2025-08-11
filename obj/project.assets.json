@@ -237,6 +237,9 @@
       "HS.Common.Collection/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "HS.Common.System": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/HS.Common.Collection.dll": {}
         },
@@ -247,9 +250,6 @@
       "HS.Common.System/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "HS.Common.Collection": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/HS.Common.System.dll": {}
         },

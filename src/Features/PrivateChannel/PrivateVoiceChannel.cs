@@ -2,7 +2,7 @@ using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
 using ManagerBot.Core;
-using ManagerBot.Core.Features.PrivateChannelFeature;
+using ManagerBot.Features.PrivateChannelFeature;
 
 public class PrivateChannel
 {
@@ -22,7 +22,7 @@ public class PrivateChannel
                         )
                     }
                 );
-                properties.CategoryId = Feature_PrivateChannel.Setting.CategoryId;
+                properties.CategoryId = Feature_TemporaryChannel.Setting.CategoryId;
             }
         );
 
@@ -41,7 +41,7 @@ public class PrivateChannel
                         )
                     }
                 );
-                properties.CategoryId = Feature_PrivateChannel.Setting.CategoryId;
+                properties.CategoryId = Feature_TemporaryChannel.Setting.CategoryId;
             }
         );
 
@@ -175,7 +175,7 @@ public class PrivateChannel
                         )
                     )
                 );
-                properties.CategoryId = Feature_PrivateChannel.Setting.CategoryId;
+                properties.CategoryId = Feature_TemporaryChannel.Setting.CategoryId;
             }
         );
     }

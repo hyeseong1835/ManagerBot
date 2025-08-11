@@ -2,7 +2,9 @@ using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
 
-namespace ManagerBot.Core.Utils.DiscordHelper;
+using ManagerBot.Core;
+
+namespace ManagerBot.Utils.DiscordHelper;
 
 public static class ChannelHelper
 {
