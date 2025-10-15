@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Generic;
+
 public class WeakDictionary<TKey, TValue> : Dictionary<TKey, WeakReference<TValue>>, ICollection<KeyValuePair<TKey, TValue>>
     where TKey : notnull
     where TValue : class

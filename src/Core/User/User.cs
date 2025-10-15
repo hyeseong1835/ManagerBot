@@ -1,5 +1,10 @@
 using Discord;
+using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using HS.Common.IO.Utf8Json;
 
 namespace ManagerBot.Core.User;
 
@@ -35,7 +40,8 @@ public class ServerUser
         {
             using (FileStream stream = File.Open(userJsonPath, FileMode.OpenOrCreate, FileAccess.Read))
             {
-                Utf8JsonReader reader = new();
+                Utf8JsonArrayReader reader = new();
+
             }
         }
         else
@@ -63,12 +69,15 @@ public class ServerUser
 
     public static ServerUser GetUserByRoleId(ulong roleId)
     {
+        if (roleId == 0)
+            throw new ArgumentOutOfRangeException(nameof(roleId), "찾을 역할의 ID는 0이 될 수 없습니다.");
+
         if (users == null)
             throw new InvalidOperationException("유저 정보가 초기화되지 않았습니다.");
 
         foreach (ServerUser user in users)
         {
-            if (user._accountIds.Contains(accountId))
+            if (user._roleId == roleId)
                 return user;
         }
 

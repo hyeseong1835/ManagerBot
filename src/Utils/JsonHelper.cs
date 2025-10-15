@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class JsonHelper
+internal class JsonHelper
 {
     public static readonly JsonSerializerOptions readableJsonSerializationOptions = new()
     {

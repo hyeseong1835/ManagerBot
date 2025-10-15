@@ -1,6 +1,10 @@
+using System;
+using System.Threading.Tasks;
+
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+
 using ManagerBot.Utils.PriorityMethod;
 
 namespace ManagerBot.Core;

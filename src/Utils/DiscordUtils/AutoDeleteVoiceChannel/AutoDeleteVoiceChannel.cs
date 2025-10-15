@@ -1,3 +1,7 @@
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Discord;
 using Discord.WebSocket;
 

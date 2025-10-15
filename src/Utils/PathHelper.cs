@@ -1,4 +1,4 @@
-public static class PathHelper
+internal static class PathHelper
 {
     public static string DataDirectoryPath { get; private set; } = string.Empty;
     public static string SettingFilePath { get; private set; } = string.Empty;

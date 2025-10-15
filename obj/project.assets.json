@@ -233,6 +233,39 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "HS.Common.IO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "HS.Common.Memory": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HS.Common.IO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HS.Common.IO.dll": {}
+        }
+      },
+      "HS.Common.Memory/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/HS.Common.Memory.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HS.Common.Memory.dll": {}
+        }
+      },
+      "HS.Common.Reflection/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/HS.Common.Reflection.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HS.Common.Reflection.dll": {}
+        }
       }
     }
   },
@@ -642,11 +675,29 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "HS.Common.IO/1.0.0": {
+      "type": "project",
+      "path": "SubModules/HS/Common/IO/HS.Common.IO.csproj",
+      "msbuildProject": "SubModules/HS/Common/IO/HS.Common.IO.csproj"
+    },
+    "HS.Common.Memory/1.0.0": {
+      "type": "project",
+      "path": "SubModules/HS/Common/Memory/HS.Common.Memory.csproj",
+      "msbuildProject": "SubModules/HS/Common/Memory/HS.Common.Memory.csproj"
+    },
+    "HS.Common.Reflection/1.0.0": {
+      "type": "project",
+      "path": "SubModules/HS/Common/Reflection/HS.Common.Reflection.csproj",
+      "msbuildProject": "SubModules/HS/Common/Reflection/HS.Common.Reflection.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Discord.Net >= 3.17.4"
+      "Discord.Net >= 3.17.4",
+      "HS.Common.IO >= 1.0.0",
+      "HS.Common.Memory >= 1.0.0",
+      "HS.Common.Reflection >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -681,7 +732,17 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\IO\\HS.Common.IO.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\IO\\HS.Common.IO.csproj"
+            },
+            "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\Memory\\HS.Common.Memory.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\Memory\\HS.Common.Memory.csproj"
+            },
+            "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\Reflection\\HS.Common.Reflection.csproj": {
+              "projectPath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\SubModules\\HS\\Common\\Reflection\\HS.Common.Reflection.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
