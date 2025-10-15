@@ -1,11 +1,14 @@
 [submodule "SubModules/HS/Common/Memory"]
 	path = SubModules/HS/Common/Memory
 	url = https://github.com/hyeseong1835/HS.Common.Memory
+	branch = ManagerBot
 
 [submodule "SubModules/HS/Common/Reflection"]
 	path = SubModules/HS/Common/Reflection
 	url = https://github.com/hyeseong1835/HS.Common.Reflection
+	branch = ManagerBot
 
 [submodule "SubModules/HS/Common/IO"]
 	path = SubModules/HS/Common/IO
 	url = https://github.com/hyeseong1835/HS.Common.IO
+    branch = ManagerBot
