@@ -36,4 +36,9 @@ public static class ChannelHelper
     {
         return ManagerBotCore.Guild.CreateTextChannelAsync(name, func, options);
     }
+    public static Task<RestVoiceChannel> CreateVoiceChannel(string name,
+        Action<VoiceChannelProperties>? func = null, RequestOptions? options = null)
+    {
+        return ManagerBotCore.Guild.CreateVoiceChannelAsync(name, func, options);
+    }
 }

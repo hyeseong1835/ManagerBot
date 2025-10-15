@@ -1,7 +1,9 @@
 using Discord;
 using Discord.WebSocket;
-using ManagerBot.Features.PrivateChannelFeature;
+
 using ManagerBot.Utils.AutoDeleteVoiceChannelUtils;
+using ManagerBot.Utils.DiscordHelper;
+using ManagerBot.Features.PrivateChannelFeature;
 
 public class TemporaryChannel
 {
@@ -59,19 +61,43 @@ public class TemporaryChannel
                 invitable,
                 null,
                 null
-            )
+            ),
+            await ChannelHelper.CreateVoiceChannel(
+                name,
+                (property) =>
+                {
+                    property.Name = name;
+                    property.PermissionOverwrites = OverwriteUtility.EveryoneDenyAllOverwriteArray;
+                    property.UserLimit = 0;
+                    property.CategoryId = Feature_TemporaryChannel.Setting.CategoryId;
+                },
+                null
+            ),
+            permissionOverwriteBufferGetter
         );
         Feature_TemporaryChannel.activeTemporaryChannels.Add(channel);
+
+        await
         return channel;
     }
+    public static async Task<TemporaryChannel> Create(string name,
+        ThreadArchiveDuration autoArchiveDuration = ThreadArchiveDuration.OneDay, bool invitable = true)
+        => Create(name,
+            new TempArrayPooler<Overwrite>(),
+            autoArchiveDuration,
+            invitable
+        );
 
     public readonly SocketThreadChannel thread;
-    public SocketVoiceChannel? voiceChannel;
+    public readonly SocketVoiceChannel voiceChannel;
 
-    TemporaryChannel(SocketThreadChannel thread, SocketVoiceChannel? voiceChannel = null)
+    public readonly ITempMemoryGetter<Overwrite> permissionOverwriteBufferGetter;
+
+    TemporaryChannel(SocketThreadChannel thread, SocketVoiceChannel voiceChannel, ITempMemoryGetter<Overwrite> permissionOverwriteBufferGetter)
     {
         this.thread = thread;
         this.voiceChannel = voiceChannel;
+        this.permissionOverwriteBufferGetter = permissionOverwriteBufferGetter;
     }
 
     public Task DeleteVoiceChannel()

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QJnLXrr9Y2U=",
+  "dgSpecHash": "E7Ixv4AAnfk=",
   "success": true,
   "projectFilePath": "C:\\Users\\comet\\Documents\\Dev\\DiscordBot\\ManagerBot\\ManagerBot.csproj",
   "expectedPackageFiles": [
@@ -18,8 +18,7 @@
     "C:\\Users\\comet\\.nuget\\packages\\system.interactive.async\\6.0.1\\system.interactive.async.6.0.1.nupkg.sha512",
     "C:\\Users\\comet\\.nuget\\packages\\system.linq.async\\6.0.1\\system.linq.async.6.0.1.nupkg.sha512",
     "C:\\Users\\comet\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
-    "C:\\Users\\comet\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\comet\\.nuget\\packages\\hs.common.system\\1.0.0\\hs.common.system.1.0.0.nupkg.sha512"
+    "C:\\Users\\comet\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -7,12 +7,12 @@ namespace ManagerBot.Core;
 
 public class OnBotInitializeMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotInitializeMethodAttribute(int priority = 100, PriorityMethodOption option = PriorityMethodOption.Auto) : base(priority, option) { }
+    public OnBotInitializeMethodAttribute(int priority = 100) : base(priority) { }
 }
 
 public class OnBotStopMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotStopMethodAttribute(int priority = 100, PriorityMethodOption option = PriorityMethodOption.Auto) : base(priority, option) { }
+    public OnBotStopMethodAttribute(int priority = 100) : base(priority) { }
 }
 
 public static class ManagerBotCore
@@ -35,8 +35,6 @@ public static class ManagerBotCore
 
     static ManagerBotSetting? setting;
     public static ManagerBotSetting Setting => setting!;
-    //public readonly static RawDiscordHttpClient rawClient = new RawDiscordHttpClient(setting.BotToken, new byte[4096]);
-    //public readonly static RawDiscordGuildHttpClient rawGuildClient = rawClient.CreateGuildClient(setting.GuildId);
 
     static SocketGuild? guild;
     public static SocketGuild Guild => guild!;

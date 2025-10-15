@@ -6,12 +6,10 @@ namespace ManagerBot.Utils.PriorityMethod;
 public abstract class PriorityMethodAttribute : Attribute
 {
     public int priority;
-    public PriorityMethodOption option;
 
-    public PriorityMethodAttribute(int priority, PriorityMethodOption option)
+    public PriorityMethodAttribute(int priority)
     {
         this.priority = priority;
-        this.option = option;
     }
     public static async Task FindAndInvoke<TAttribute>()
         where TAttribute : PriorityMethodAttribute
@@ -45,73 +43,7 @@ public abstract class PriorityMethodAttribute : Attribute
 
         while (queue.TryDequeue(out PriorityMethodInfo methodInfo, out int priority))
         {
-            switch (methodInfo.attribute.option)
-            {
-                case PriorityMethodOption.Auto:
-                {
-                    switch (methodInfo.info.ReturnType)
-                    {
-                        case Type t when t == typeof(ValueTask):
-                        {
-                            await (ValueTask)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        case Type t when t == typeof(Task):
-                        {
-                            await (Task)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        case Type t when typeof(Task).IsAssignableFrom(t):
-                        {
-                            await (Task)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        default:
-                        {
-                            methodInfo.info.Invoke(null, null);
-                            break;
-                        }
-                    }
-                    break;
-                }
-
-                case PriorityMethodOption.NonAwait:
-                {
-                    methodInfo.info.Invoke(null, null);
-                    break;
-                }
-
-                case PriorityMethodOption.Await:
-                {
-                    switch (methodInfo.info.ReturnType)
-                    {
-                        case Type t when t == typeof(ValueTask):
-                        {
-                            await (ValueTask)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        case Type t when t == typeof(Task):
-                        {
-                            await (Task)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        case Type t when typeof(Task).IsAssignableFrom(t):
-                        {
-                            await (Task)methodInfo.info.Invoke(null, null)!;
-                            break;
-                        }
-
-                        default:
-                            throw new InvalidOperationException($"Method {methodInfo.info.Name}의 반환 형식은 대기할 수 없습니다.");
-                    }
-                    break;
-                }
-            }
+            await (ValueTask)methodInfo.info.Invoke(null, null)!;
         }
     }
 }

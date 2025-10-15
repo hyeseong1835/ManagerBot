@@ -32,7 +32,7 @@ public abstract class MachineInfo
     public virtual int ProcessorCount => Environment.ProcessorCount;
     public virtual TimeSpan TotalCpuTime => Environment.CpuUsage.TotalTime;
 
-    public virtual long UsedDiskSpace => AvailableDiskSpace - TotalDiskSpace;
+    public virtual long UsedDiskSpace => TotalDiskSpace - AvailableDiskSpace;
     public virtual long AvailableDiskSpace => driveInfo.AvailableFreeSpace;
     public virtual long TotalDiskSpace => driveInfo.TotalSize;
 

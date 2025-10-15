@@ -7,13 +7,23 @@ public class Program
 {
     public static readonly MachineInfo machineInfo = MachineInfo.CreateMachineInfo();
 
-
     public static async Task Main(string[] args)
     {
         PathHelper.SetDataDirectoryPath(args[0]);
 
         await ManagerBotCore.Initialize();
 
-        await Task.Delay(-1);
+        while (true)
+        {
+            string? command = Console.ReadLine();
+            if (command == null)
+                continue;
+
+            if (command == "stop")
+            {
+                Console.WriteLine("Stopping the bot...");
+                break;
+            }
+        }
     }
 }

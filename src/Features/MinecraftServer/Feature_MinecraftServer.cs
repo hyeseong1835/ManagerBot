@@ -3,87 +3,88 @@ using System.Text.Json.Serialization;
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
+using ManagerBot.Core.Features.ManagerBotDebugFeature;
+using ManagerBot.Core.Utils.DiscordHelper;
 
-using ManagerBot.Core;
-using ManagerBot.Utils.DiscordHelper;
-using ManagerBot.Utils.PriorityMethod;
+namespace ManagerBot.Core.Features.MinecraftServerFeature;
 
-namespace ManagerBot.Features.ManagerBotDebugFeature;
-
-public class ManagerBotDebugSetting
+public class MinecraftServerSetting
 {
     [JsonPropertyName("dashboardChannelId")]
     public ulong DashboardChannelId { get; set; } = 0;
 
     [JsonPropertyName("dashboardMessageId")]
     public ulong DashboardMessageId { get; set; } = 0;
+
+    [JsonPropertyName("servers")]
+    public string[] Servers { get; set; } = Array.Empty<string>();
 }
 
-[FeatureInfo("ManagerBotDebug")]
-public class Feature_ManagerBotDebug : Feature
+[FeatureInfo("MinecraftServer")]
+public class Feature_MinecraftServer : Feature
 {
     // 싱글턴 인스턴스
-    static Feature_ManagerBotDebug? instance;
-    public static Feature_ManagerBotDebug Instance => instance!;
+    static Feature_MinecraftServer? instance;
+    public static Feature_MinecraftServer Instance => instance!;
 
     // 커스텀 아이디
-    public const string customId_Button_DashboardUpdate = "managerbotdebug/dashboard-update";
+    public const string customId_Button_PannelUpdate = "managerbotdebug/pannel-update";
 
     // 설정
-    static ManagerBotDebugSetting? setting;
-    public static ManagerBotDebugSetting Setting => setting!;
+    MinecraftServerSetting? setting;
 
     // 대시보드 채널
-    static SocketTextChannel? dashboardChannel;
-    public static SocketTextChannel DashboardChannel => dashboardChannel!;
-
+    SocketTextChannel? dashboardChannel;
 
     // 생성자
-    public Feature_ManagerBotDebug()
+    public Feature_MinecraftServer()
     {
         instance = this;
     }
-
 
     #region 이벤트
 
     public override async ValueTask Load()
     {
-        setting = await LoadSettingAsync<ManagerBotDebugSetting>()
+        setting = await LoadSettingAsync<MinecraftServerSetting>()
             .ConfigureAwait(false);
-
-        dashboardChannel = ChannelHelper.GetTextChannel(setting.DashboardChannelId);
     }
 
     [OnBotInitializeMethod(Feature.featureInitializePriority + 1)]
     static async ValueTask AfterFeatureInitialize()
     {
-        if (instance == null || instance.IsLoadSuccss == false)
+        Feature_MinecraftServer instance = Feature_MinecraftServer.instance!;
+
+        if (instance.IsLoadSuccss == false)
             return;
+
+        MinecraftServerSetting setting = instance.setting!;
+        SocketTextChannel dashboardChannel = instance.dashboardChannel!;
 
         bool isSettingDirty = false;
 
         if (dashboardChannel == null)
         {
             RestTextChannel restChannel = await ChannelHelper.CreateTextChannel("매니저봇");
-            dashboardChannel = ChannelHelper.GetTextChannel(restChannel.Id);
+            instance.dashboardChannel = ChannelHelper.GetTextChannel(restChannel.Id);
+            dashboardChannel = instance.dashboardChannel;
 
-            Setting.DashboardChannelId = restChannel.Id;
+            setting.DashboardChannelId = restChannel.Id;
             isSettingDirty = true;
         }
 
-        IMessage? dashboardMessage = await MessageHelper.GetMessageAsync(dashboardChannel, Setting.DashboardMessageId);
+        IMessage? dashboardMessage = await MessageHelper.GetMessageAsync(dashboardChannel, setting.DashboardMessageId);
 
         if (dashboardMessage == null)
         {
-            RestUserMessage restMessage = await DashboardChannel.SendMessageAsync("...");
-            Setting.DashboardMessageId = restMessage.Id;
+            RestUserMessage restMessage = await dashboardChannel.SendMessageAsync("...");
+            setting.DashboardMessageId = restMessage.Id;
             isSettingDirty = true;
         }
 
         if (isSettingDirty)
         {
-            await instance.SaveSettingAsync(Setting);
+            await instance.SaveSettingAsync(setting);
         }
 
         try
@@ -95,10 +96,9 @@ public class Feature_ManagerBotDebug : Feature
             Console.WriteLine($"패널 업데이트 실패: {ex.Message}");
         }
 
-
         ManagerBotCore.client.ButtonExecuted += async (SocketMessageComponent component) =>
         {
-            if (component.Data.CustomId == Feature_ManagerBotDebug.customId_Button_DashboardUpdate)
+            if (component.Data.CustomId == Feature_MinecraftServer.customId_Button_PannelUpdate)
             {
                 await instance.PannelUpdateAsync();
                 await component.AutoRemoveRespondAsync();
@@ -125,7 +125,7 @@ public class Feature_ManagerBotDebug : Feature
                 msg.Content = null;
                 msg.Embed = new EmbedBuilder()
                 {
-                  Title = "매니저봇 디버그 패널",
+                    Title = "매니저봇 디버그 패널",
                     Fields = [
                         new EmbedFieldBuilder()
                         {
@@ -140,7 +140,6 @@ public class Feature_ManagerBotDebug : Feature
                             Value = $"{ManagerBotCore.client.Latency}ms"
                         },
                         Program.machineInfo.GetMachineInfoEmbedFieldBuilder()
-
                     ],
                     Color = Color.Blue,
                     Timestamp = DateTime.UtcNow.AddHours(9)
@@ -154,7 +153,7 @@ public class Feature_ManagerBotDebug : Feature
                             Components = [
                                 new ButtonBuilder()
                                 {
-                                    CustomId = Feature_ManagerBotDebug.customId_Button_DashboardUpdate,
+                                    CustomId = Feature_ManagerBotDebug.customId_Button_PannelUpdate,
                                     Label = "새로고침",
                                     Style = ButtonStyle.Primary,
                                     // Emote = new Emote(0x1F501, "repeat", false), // 🔁

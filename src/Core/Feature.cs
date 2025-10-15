@@ -1,9 +1,8 @@
-using System.Collections.ObjectModel;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Reflection;
 
-using HS.Common.System;
+using HS.Common.Reflection;
 
 namespace ManagerBot.Core;
 
@@ -56,7 +55,7 @@ public abstract class Feature
     public static readonly FeatureInfo[] featureInfos = new Func<FeatureInfo[]>(
         static () =>
         {
-            IEnumerable<Type> featureTypes = TypeUtility.LoadChildType(typeof(Feature));
+            IEnumerable<Type> featureTypes = TypeUtility.GetChildTypes<Feature>();
             FeatureInfo[] infos = new FeatureInfo[featureTypes.Count()];
             int i = 0;
             foreach (Type type in featureTypes)
