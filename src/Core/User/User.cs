@@ -1,10 +1,12 @@
-using Discord;
 using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using HS.Common.IO.Utf8Json;
+
+using Discord;
+
+using HS.Common.IO.AsciiJson;
 
 namespace ManagerBot.Core.User;
 
@@ -40,8 +42,17 @@ public class ServerUser
         {
             using (FileStream stream = File.Open(userJsonPath, FileMode.OpenOrCreate, FileAccess.Read))
             {
-                Utf8JsonArrayReader reader = new();
+                AsciiJsonArrayStreamAsyncReader reader = new (stream);
+                AsciiJsonArrayStreamAsyncReader.ReadResult result;
+                while (true)
+                {
+                    result = await reader.ReadAsync();
 
+                    if (result.type == AsciiJson)
+
+                    if (result.isEndRead)
+                        break;
+                }
             }
         }
         else
