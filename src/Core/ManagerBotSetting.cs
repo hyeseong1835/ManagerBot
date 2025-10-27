@@ -1,14 +1,20 @@
-using System;
+using ManagerBot.Core;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Collections.Generic;
 
 public class ManagerBotSetting
 {
+    [OnSaveMethod]
+    public static async ValueTask OnSave()
+    {
+        if (ManagerBotCore.Setting != null)
+        {
+            await SaveAsync(ManagerBotCore.Setting);
+        }
+    }
+
     public static async ValueTask<ManagerBotSetting> LoadAsync()
     {
         string filePath = PathHelper.SettingFilePath;
@@ -23,6 +29,7 @@ public class ManagerBotSetting
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
         return (await JsonSerializer.DeserializeAsync<ManagerBotSetting>(fileStream, new JsonSerializerOptions { WriteIndented = true }))!;
     }
+
     public static async ValueTask SaveAsync(ManagerBotSetting setting)
     {
         string filePath = PathHelper.SettingFilePath;

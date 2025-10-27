@@ -12,3 +12,8 @@
 	path = SubModules/HS/Common/IO
 	url = https://github.com/hyeseong1835/HS.Common.IO
     branch = ManagerBot
+
+[submodule "SubModules/HS/Common/Threading"]
+	path = SubModules/HS/Common/Threading
+	url = https://github.com/hyeseong1835/HS.Common.Threading
+    branch = ManagerBot

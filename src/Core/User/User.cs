@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -17,12 +18,15 @@ public class ServerUser
     readonly static string userJsonPath = $"{PathHelper.DataDirectoryPath}/users.json";
     static ServerUser[]? users;
 
-    [OnBotInitializeMethod(0)]
+    [OnInitializeMethod(0)]
     public static async ValueTask Initialize()
     {
         // 파일이 없으면 생성
         users = await LoadUsers();
+        await SaveAsync();
     }
+
+    [OnStopMethod(0)]
     public static async ValueTask SaveAsync()
     {
         if (users == null)
@@ -30,37 +34,83 @@ public class ServerUser
 
         using (FileStream stream = File.Open(userJsonPath, FileMode.Create, FileAccess.Write))
         {
-            await JsonSerializer.SerializeAsync(stream, users, JsonHelper.readableJsonSerializationOptions);
+            Utf8JsonWriter writer = new(stream, new JsonWriterOptions { Indented = true });
+            writer.WriteStartArray();
+            {
+                for (int i = 0; i < users.Length; i++)
+                {
+                    writer.WriteStartObject();
+                    {
+                        writer.WriteNumber("roleId", users[i]._roleId);
+
+                        writer.WritePropertyName("accountIds");
+                        writer.WriteStartArray();
+                        {
+                            for (int j = 0; j < users[i]._accountIds.Length; j++)
+                            {
+                                writer.WriteNumberValue(users[i]._accountIds[j]);
+                            }
+                        }
+                        writer.WriteEndArray();
+                    }
+                    writer.WriteEndObject();
+                }
+            }
+            writer.WriteEndArray();
+
+            await writer.FlushAsync();
         }
     }
 
     static async ValueTask<ServerUser[]> LoadUsers()
     {
         SortedList<ulong, ServerUser> userList = new();
+        Utf8JsonReader userJsonReader;
+        List<ulong> accountIds = new();
 
         if (File.Exists(userJsonPath))
         {
             using (FileStream stream = File.Open(userJsonPath, FileMode.OpenOrCreate, FileAccess.Read))
             {
-                AsciiJsonArrayStreamAsyncReader reader = new (stream);
+                AsciiJsonArrayStreamAsyncReader reader = new(stream);
                 AsciiJsonArrayStreamAsyncReader.ReadResult result;
                 while (true)
                 {
                     result = await reader.ReadAsync();
 
-                    if (result.type == AsciiJson)
-
                     if (result.isEndRead)
                         break;
+
+                    userJsonReader = new Utf8JsonReader(result.jsonElementBytes.Span, isFinalBlock: result.isEndRead, state: default);
+                    ulong roleId = 0;
+                    while (userJsonReader.Read())
+                    {
+                        if (userJsonReader.TokenType == JsonTokenType.PropertyName)
+                        {
+                            if (userJsonReader.ValueSpan.SequenceEqual("roleId"u8))
+                            {
+                                userJsonReader.Read();
+                                roleId = userJsonReader.GetUInt64();
+                            }
+                            else if (userJsonReader.ValueSpan.SequenceEqual("accountIds"u8))
+                            {
+                                userJsonReader.Read();
+                                accountIds.Clear();
+
+                                while (userJsonReader.Read())
+                                {
+                                    if (userJsonReader.TokenType == JsonTokenType.EndArray)
+                                        break;
+
+                                    accountIds.Add(userJsonReader.GetUInt64());
+                                }
+
+                            }
+                        }
+                    }
+                    userList.Add(accountIds[0], new ServerUser(roleId, accountIds.ToArray()));
                 }
             }
-        }
-        else
-        {
-            ServerUser[] newUsers = new ServerUser[userList.Count];
-            userList.Values.CopyTo(newUsers, 0);
-
-            return newUsers;
         }
 
         await foreach (IReadOnlyCollection<IGuildUser>? users in ManagerBotCore.Guild.GetUsersAsync())
@@ -73,9 +123,11 @@ public class ServerUser
                 if (user.IsBot)
                     continue;
 
-                userList.Add(user.Id, new ServerUser(0, [user.Id]));
+                userList.TryAdd(user.Id, new ServerUser(0, [user.Id]));
             }
         }
+
+        return userList.Values.ToArray();
     }
 
     public static ServerUser GetUserByRoleId(ulong roleId)

@@ -15,11 +15,13 @@ public struct AutoDeleteVoiceChannel
 
     #region 이벤트
 
-    [OnBotInitializeMethod]
-    static void Initialize()
+    [OnInitializeMethod]
+    static ValueTask Initialize()
     {
         ManagerBotCore.client.UserVoiceStateUpdated += UserVoiceStateUpdated;
         ManagerBotCore.client.ChannelDestroyed += ChannelDestroyed;
+
+        return ValueTask.CompletedTask;
     }
 
     static Task UserVoiceStateUpdated(SocketUser user, SocketVoiceState before, SocketVoiceState after)

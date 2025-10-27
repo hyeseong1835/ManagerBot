@@ -47,7 +47,31 @@ public abstract class PriorityMethodAttribute : Attribute
 
         while (queue.TryDequeue(out PriorityMethodInfo methodInfo, out int priority))
         {
-            await (ValueTask)methodInfo.info.Invoke(null, null)!;
+            try
+            {
+                Console.WriteLine($"메서드 실행: {methodInfo.info.DeclaringType?.FullName ?? "Null"}/{methodInfo.info.Name}");
+                object? result = methodInfo.info.Invoke(null, null);
+
+                if (result == null)
+                {
+                    Console.WriteLine($"잘못된 반환: {methodInfo.info.DeclaringType?.FullName ?? "Null"}/{methodInfo.info.Name} return null");
+                    continue;
+                }
+
+                if (result is not ValueTask task)
+                {
+                    Console.WriteLine($"잘못된 반환: {methodInfo.info.DeclaringType?.FullName ?? "Null"}/{methodInfo.info.Name} return {result.GetType().FullName}");
+                    continue;
+                }
+
+                await task;
+            }
+            catch (TargetInvocationException ex)
+            {
+                Console.WriteLine($"메서드 실행 중 예외 발생: {methodInfo.info.DeclaringType?.FullName ?? "Null"}/{methodInfo.info.Name}");
+                Console.WriteLine(ex.InnerException?.ToString() ?? ex.ToString());
+                continue;
+            }
         }
     }
 }

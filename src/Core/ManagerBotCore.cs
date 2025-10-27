@@ -9,14 +9,19 @@ using ManagerBot.Utils.PriorityMethod;
 
 namespace ManagerBot.Core;
 
-public class OnBotInitializeMethodAttribute : PriorityMethodAttribute
+public class OnInitializeMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotInitializeMethodAttribute(int priority = 100) : base(priority) { }
+    public OnInitializeMethodAttribute(int priority = 100) : base(priority) { }
 }
 
-public class OnBotStopMethodAttribute : PriorityMethodAttribute
+public class OnSaveMethodAttribute : PriorityMethodAttribute
 {
-    public OnBotStopMethodAttribute(int priority = 100) : base(priority) { }
+    public OnSaveMethodAttribute(int priority = 100) : base(priority) { }
+}
+
+public class OnStopMethodAttribute : PriorityMethodAttribute
+{
+    public OnStopMethodAttribute(int priority = 100) : base(priority) { }
 }
 
 public static class ManagerBotCore
@@ -38,10 +43,10 @@ public static class ManagerBotCore
     );
 
     static ManagerBotSetting? setting;
-    public static ManagerBotSetting Setting => setting!;
+    public static ManagerBotSetting? Setting => setting;
 
     static SocketGuild? guild;
-    public static SocketGuild Guild => guild!;
+    public static SocketGuild? Guild => guild;
 
     public static async ValueTask Initialize()
     {
@@ -53,7 +58,7 @@ public static class ManagerBotCore
         await client.StartAsync();
 
         // Ready 이벤트 발생 대기용 TaskCompletionSource
-        var readyTcs = new TaskCompletionSource();
+        TaskCompletionSource readyTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
         client.Ready += async () =>
         {
@@ -66,10 +71,10 @@ public static class ManagerBotCore
                 Console.WriteLine($"길드 로드: {guild.Name} ({guild.Id})");
 
                 // 로드
-                await PriorityMethodAttribute.FindAndInvoke<OnBotInitializeMethodAttribute>();
+                await PriorityMethodAttribute.FindAndInvoke<OnInitializeMethodAttribute>();
 
                 // Ready 이벤트 완료 신호
-                readyTcs.TrySetResult();
+                readyTcs.SetResult();
             }
             catch (Exception ex)
             {
@@ -80,19 +85,36 @@ public static class ManagerBotCore
 
         client.Log += (log) =>
         {
-            Console.WriteLine($"[{log.Severity}] {log.Source}: {log.Message}");
-            if (log.Exception != null)
-                Console.WriteLine(log.Exception);
+            if (log.Severity >= LogSeverity.Warning)
+            {
+                _ = Debug.LogErrorAsync(log.Source, log.Message, log.Exception?.ToString());
+            }
+            else
+            {
+                _ = Debug.LogAsync(log.Source, log.Message, log.Exception?.ToString());
+            }
+
             return Task.CompletedTask;
         };
 
         // Ready 이벤트까지 대기
         await readyTcs.Task;
     }
+
+    public static async ValueTask Save()
+    {
+        // 저장 메서드 호출
+        await PriorityMethodAttribute.FindAndInvoke<OnSaveMethodAttribute>();
+
+        // 설정 저장
+        if (setting != null)
+            await ManagerBotSetting.SaveAsync(setting);
+    }
+
     public static async ValueTask Stop()
     {
         // 봇 종료 이벤트 발생
-        await PriorityMethodAttribute.FindAndInvoke<OnBotStopMethodAttribute>();
+        await PriorityMethodAttribute.FindAndInvoke<OnStopMethodAttribute>();
 
         // 설정 저장
         if (setting != null)
