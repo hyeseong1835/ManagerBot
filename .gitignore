@@ -1,8 +1,8 @@
 # /bin 무시
-/bin
+bin
 
 # /obj 무시
-/obj
+obj
 
 # test 폴더 무시
 test

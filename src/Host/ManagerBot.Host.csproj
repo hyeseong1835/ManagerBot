@@ -18,15 +18,17 @@
 
     <Compile Remove="**/~*" />
     <Compile Remove="**/~*/**/*" />
-    <Compile Remove="SubModules/**" />
+
+    <Compile Remove="src/**" />
+    <Compile Include="src/Scripts" />
 
     <PackageReference Include="Discord.Net" Version="3.17.4" />
 
     <PackageReference Include="System.CommandLine" Version="2.0.0-rc.2.25502.107" />
 
-    <ProjectReference Include="./SubModules/HS/Common/IO/HS.Common.IO.csproj" />
-    <ProjectReference Include="./SubModules/HS/Common/Memory/HS.Common.Memory.csproj" />
-    <ProjectReference Include="./SubModules/HS/Common/Reflection/HS.Common.Reflection.csproj" />
+    <ProjectReference Include="./src/SubModules/HS/Common/IO/HS.Common.IO.csproj" />
+    <ProjectReference Include="./src/SubModules/HS/Common/Memory/HS.Common.Memory.csproj" />
+    <ProjectReference Include="./src/SubModules/HS/Common/Reflection/HS.Common.Reflection.csproj" />
 
   </ItemGroup>
 
