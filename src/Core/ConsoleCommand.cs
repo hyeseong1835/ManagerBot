@@ -25,7 +25,7 @@ public abstract class ConsoleCommand
             ConsoleCommand? consoleCommand = (ConsoleCommand?)Activator.CreateInstance(type);
             if (consoleCommand == null)
             {
-                _ = Debug.LogErrorAsync("ConsoleCommand", $"콘솔 커맨드 인스턴스를 생성할 수 없습니다. : {type.Name}");
+                Debug.LogError("ConsoleCommand", $"콘솔 커맨드 인스턴스를 생성할 수 없습니다. : {type.Name}");
                 continue;
             }
 

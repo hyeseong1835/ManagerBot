@@ -90,7 +90,7 @@ public abstract class Feature
         {
             // 설정 파일이 없으면 기본 설정을 생성
             await SaveFeatureSettingAsync(new FeatureSetting());
-            _ = Debug.LogErrorAsync("Feature", $"기능 설정 파일이 존재하지 않습니다. 기본 설정을 생성했습니다: {featureSettingPath}");
+            Debug.LogError("Feature", $"기능 설정 파일이 존재하지 않습니다. 기본 설정을 생성했습니다: {featureSettingPath}");
 
             // 10초 후 종료
             await Task.Delay(10000);
@@ -124,7 +124,7 @@ public abstract class Feature
             FeatureInfo? featureInfo = FindFeatureInfo(loadInfo.Name);
             if (featureInfo == null)
             {
-                _ = Debug.LogErrorAsync("Feature", $"기능 '{loadInfo.Name}'의 정보를 찾을 수 없습니다. 로드하지 않습니다.");
+                Debug.LogError("Feature", $"기능 '{loadInfo.Name}'의 정보를 찾을 수 없습니다. 로드하지 않습니다.");
                 continue;
             }
 
@@ -132,7 +132,7 @@ public abstract class Feature
             Feature? feature = (Feature?)Activator.CreateInstance(featureInfo.type);
             if (feature == null)
             {
-                _ = Debug.LogErrorAsync("Feature", $"기능 '{loadInfo.Name}'을(를) 인스턴스화 할 수 없습니다. 로드하지 않습니다.");
+                Debug.LogError("Feature", $"기능 '{loadInfo.Name}'을(를) 인스턴스화 할 수 없습니다. 로드하지 않습니다.");
                 continue;
             }
 
@@ -142,7 +142,7 @@ public abstract class Feature
 
             Feature.loadedFeatures[featureIndex++] = feature;
 
-            _ = Debug.LogErrorAsync("Feature", $"기능 '{feature.Info.name}' 인스턴싱.");
+            Debug.LogError("Feature", $"기능 '{feature.Info.name}' 인스턴싱.");
         }
 
         int writeIndex = 0;
@@ -158,11 +158,11 @@ public abstract class Feature
                 feature.isLoadSuccess = true;
 
                 Feature.loadedFeatures[writeIndex++] = feature;
-                _ = Debug.LogErrorAsync("Feature", $"기능 '{feature.Info.name}' 로드.");
+                Debug.LogError("Feature", $"기능 '{feature.Info.name}' 로드.");
             }
             catch (Exception ex)
             {
-                _ = Debug.LogErrorAsync("Feature", $"기능 '{feature.Info.name}'을(를) 로드하는 중 오류가 발생했습니다: {ex.Message}");
+                Debug.LogError("Feature", $"기능 '{feature.Info.name}'을(를) 로드하는 중 오류가 발생했습니다: {ex.Message}");
             }
         }
 
@@ -180,7 +180,7 @@ public abstract class Feature
             }
             catch (Exception ex)
             {
-                _ = Debug.LogErrorAsync("Feature", $"기능 '{feature.Info.name}'을(를) 언로드하는 중 오류가 발생했습니다: {ex.Message}");
+                Debug.LogError("Feature", $"기능 '{feature.Info.name}'을(를) 언로드하는 중 오류가 발생했습니다: {ex.Message}");
             }
         }
     }
@@ -264,7 +264,7 @@ public abstract class Feature
         // 설정 파일이 없으면 기본 설정을 생성
         if (false == File.Exists(settingPath))
         {
-            _ = Debug.LogErrorAsync("Feature", $"설정 파일이 존재하지 않습니다. 기본 설정을 생성합니다: {settingPath}");
+            Debug.LogError("Feature", $"설정 파일이 존재하지 않습니다. 기본 설정을 생성합니다: {settingPath}");
 
             Directory.CreateDirectory(Path);
             SaveSettingAsync<TSetting>().GetAwaiter().GetResult();

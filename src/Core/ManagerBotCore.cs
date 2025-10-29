@@ -87,11 +87,11 @@ public static class ManagerBotCore
         {
             if (log.Severity >= LogSeverity.Warning)
             {
-                _ = Debug.LogErrorAsync(log.Source, log.Message, log.Exception?.ToString());
+                Debug.LogError(log.Source, log.Message, log.Exception?.ToString());
             }
             else
             {
-                _ = Debug.LogAsync(log.Source, log.Message, log.Exception?.ToString());
+                Debug.Log(log.Source, log.Message, log.Exception?.ToString());
             }
 
             return Task.CompletedTask;

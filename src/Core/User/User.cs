@@ -113,7 +113,7 @@ public class ServerUser
             }
         }
 
-        await foreach (IReadOnlyCollection<IGuildUser>? users in ManagerBotCore.Guild.GetUsersAsync())
+        await foreach (IReadOnlyCollection<IGuildUser>? users in ManagerBotCore.Guild!.GetUsersAsync())
         {
             if (users == null)
                 continue;
