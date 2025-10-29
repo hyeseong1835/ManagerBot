@@ -26,8 +26,6 @@
 
     <PackageReference Include="System.CommandLine" Version="2.0.0-rc.2.25502.107" />
 
-    <ProjectReference Include="../Utils/ManagerBot.Utils.csproj" />
-
     <ProjectReference Include="./src/SubModules/HS/Common/IO/HS.Common.IO.csproj" />
     <ProjectReference Include="./src/SubModules/HS/Common/Memory/HS.Common.Memory.csproj" />
     <ProjectReference Include="./src/SubModules/HS/Common/Reflection/HS.Common.Reflection.csproj" />
