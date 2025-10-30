@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 
-using ManagerBot.Core;
-using ManagerBot.Utils;
-using ManagerBot.Utils.Extension.Discord.WebSocket;
-
 namespace ManagerBot.SlashCommandSystem;
 
 public abstract class SlashCommandGroup : SlashCommand

@@ -24,10 +24,7 @@ public class FeatureInfo
         this.instance = instance;
     }
 }
-
-public abstract class Feature
-{
-    protected class FeatureInfoAttribute : Attribute
+public class FeatureInfoAttribute : Attribute
     {
         public string name;
 
@@ -43,13 +40,17 @@ public abstract class Feature
 
         public FeatureLoadInfo() { }
     }
-    public class FeatureSetting
-    {
-        [JsonPropertyName("featureLoad")]
-        public FeatureLoadInfo[] FeatureLoads { get; set; } = Array.Empty<FeatureLoadInfo>();
 
-        public FeatureSetting() { }
-    }
+public class FeatureSetting
+{
+    [JsonPropertyName("featureLoad")]
+    public FeatureLoadInfo[] FeatureLoads { get; set; } = Array.Empty<FeatureLoadInfo>();
+
+    public FeatureSetting() { }
+}
+
+public abstract class Feature
+{
 
     public const int featureInitializePriority = 50;
 

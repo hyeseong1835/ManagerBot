@@ -1,12 +1,14 @@
-[submodule "Host/HS/Common/IO"]
-	path = src/Host/src/Submodules/HS/Common/IO
-	url = https://github.com/hyeseong1835/HS.Common.IO
-	branch = ManagerBot
-[submodule "Host/HS/Common/Memory"]
-	path = src/Host/src/Submodules/HS/Common/Memory
+[submodule "HS/Common/Memory"]
+	path = src/Submodules/HS/Common/Memory
 	url = https://github.com/hyeseong1835/HS.Common.Memory
-	branch = ManagerBot
-[submodule "Host/HS/Common/Reflection"]
-	path = src/Host/src/Submodules/HS/Common/Reflection
+	branch = ManagerBot.Host
+
+[submodule "HS/Common/IO"]
+	path = src/Submodules/HS/Common/IO
+	url = https://github.com/hyeseong1835/HS.Common.IO
+	branch = ManagerBot.Host
+
+[submodule "HS/Common/Reflection"]
+	path = src/Submodules/HS/Common/Reflection
 	url = https://github.com/hyeseong1835/HS.Common.Reflection
-	branch = ManagerBot
+	branch = ManagerBot.Host

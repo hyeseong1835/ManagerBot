@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ManagerBot.SlashCommandSystem.InfoCommandGroup;
+
 public class Command : SubCommand
 {
     public Command(string name, string description) : base(name, description) { }
@@ -17,7 +18,7 @@ public class Command : SubCommand
             embedBuilder.WithDescription(
                 string.Join(
                     "\n",
-                    SlashCommand.globalCommands.Values
+                    SlashCommand.commands.Values
                         .Select(c => $"`/{c.Name}`: {c.Description}")
                 )
             );

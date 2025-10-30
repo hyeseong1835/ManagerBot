@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,5 +12,11 @@
     <NoWarn>1591</NoWarn>
 
   </PropertyGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="Discord.Net" />
+
+  </ItemGroup>
 
 </Project>

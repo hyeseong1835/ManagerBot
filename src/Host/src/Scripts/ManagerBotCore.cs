@@ -9,22 +9,22 @@ using ManagerBot.Utils.PriorityMethod;
 
 namespace ManagerBot.Core;
 
-public class OnInitializeMethodAttribute : PriorityMethodAttribute
+internal class OnInitializeMethodAttribute : PriorityMethodAttribute
 {
     public OnInitializeMethodAttribute(int priority = 100) : base(priority) { }
 }
 
-public class OnSaveMethodAttribute : PriorityMethodAttribute
+internal class OnSaveMethodAttribute : PriorityMethodAttribute
 {
     public OnSaveMethodAttribute(int priority = 100) : base(priority) { }
 }
 
-public class OnStopMethodAttribute : PriorityMethodAttribute
+internal class OnStopMethodAttribute : PriorityMethodAttribute
 {
     public OnStopMethodAttribute(int priority = 100) : base(priority) { }
 }
 
-public static class ManagerBotCore
+internal static class ManagerBotCore
 {
     public readonly static DiscordSocketClient client = new DiscordSocketClient(
         new DiscordSocketConfig
@@ -85,13 +85,25 @@ public static class ManagerBotCore
 
         client.Log += (log) =>
         {
-            if (log.Severity >= LogSeverity.Warning)
+            switch (log.Severity)
             {
-                Debug.LogError(log.Source, log.Message, log.Exception?.ToString());
-            }
-            else
-            {
-                Debug.Log(log.Source, log.Message, log.Exception?.ToString());
+                case LogSeverity.Critical:
+                case LogSeverity.Error:
+                    Debug.LogError($"DiscordSocketClient:{log.Source}", $"{log.Message}:\n, {log.Exception.GetType().Name}: {log.Exception.Message}");
+                    break;
+
+                case LogSeverity.Warning:
+                    Debug.LogWarning($"DiscordSocketClient:{log.Source}", $"{log.Message}:\n, {log.Exception.GetType().Name}: {log.Exception.Message}");
+                    break;
+
+                case LogSeverity.Info:
+                    Debug.Log($"DiscordSocketClient:{log.Source}", log.Message);
+                    break;
+
+                case LogSeverity.Verbose:
+                case LogSeverity.Debug:
+                    Debug.Log($"DiscordSocketClient:{log.Source}", log.Message);
+                    break;
             }
 
             return Task.CompletedTask;
